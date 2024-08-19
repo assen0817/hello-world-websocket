@@ -1,5 +1,5 @@
 {
-  "name": "rust-websocket-in-tauri",
+  "name": "hello-world-websocket",
   "private": true,
   "version": "0.1.0",
   "type": "module",
