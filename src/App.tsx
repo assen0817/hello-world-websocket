@@ -1,16 +1,34 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/tauri";
+import { listen } from '@tauri-apps/api/event'
 import "./App.css";
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  const [msg, setMsg] = useState("");
 
-  async function greet() {
+  // Rustへ値を送信
+  async function sendWebsocket() {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    setGreetMsg(await invoke("greet", { name }));
+    await invoke("send_websocket", { msg })
   }
+  // Rustからデータを監視
+  useEffect(() => {
+    let unlisten: any;
+    async function f() {
+      unlisten = await listen('back-to-front', event => {
+          console.log('back-to-front', event.payload, new Date());
+          setGreetMsg("Received: " + String(event.payload));
+        });
+    }
+    f();
+    return () => {
+        if (unlisten){
+            unlisten();
+        }
+    }
+  }, []);
 
   return (
     <div className="container">
@@ -34,12 +52,12 @@ function App() {
         className="row"
         onSubmit={(e) => {
           e.preventDefault();
-          greet();
+          sendWebsocket();
         }}
       >
         <input
           id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
+          onChange={(e) => setMsg(e.currentTarget.value)}
           placeholder="Enter a name..."
         />
         <button type="submit">Greet</button>
