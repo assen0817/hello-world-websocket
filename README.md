@@ -1,8 +1,6 @@
 # Hello World Socket
 
-<img src="https://img.shields.io/badge/-Tauri-24C8D8.svg?logo=tauri&style=plastic">
-<img src="https://img.shields.io/badge/-React-61DAFB.svg?logo=react&style=plastic">
-<img src="https://img.shields.io/badge/-Typescript-007ACC.svg?logo=typescript&style=plastic">
+<img src="https://img.shields.io/badge/-Tauri-24C8D8.svg?logo=tauri&style=plastic">　<img src="https://img.shields.io/badge/-React-61DAFB.svg?logo=react&style=plastic">　<img src="https://img.shields.io/badge/-Typescript-007ACC.svg?logo=typescript&style=plastic">
 
 
 # プロジェクトの概要
